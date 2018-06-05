@@ -91,23 +91,23 @@ namespace PrimerParcial.BLL
          
         }
 
-        public static List<Grupos> GetList(Expression<Func> Grupos, bool>>expression){
+        //public static List<Grupos> GetList(Expression<Func> Grupos, bool>>expression){
             List<Grupos> grupos = new List<Grupos>();
             Contexto contexto = new Contexto();
-            try
-            {
-                grupos = contexto.Grupo.Where(expression).ToList();
-                contexto.Dispose();
+//try
+           // {
+               // grupos = contexto.Grupo.Where(expression).ToList();
+                //contexto.Dispose();
 
             }
-            catch (Exception) {
-                throw;
+          //  catch (Exception) {
+               // throw;
             }
-            return grupos;
-        }
+            //return grupos;
+        //}
 
-    }
+   // }
        
-}
+//}
 
 

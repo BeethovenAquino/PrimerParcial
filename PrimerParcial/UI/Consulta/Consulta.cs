@@ -52,10 +52,8 @@ namespace PrimerParcial.UI.Consulta
                     break;
             }
 
-            ConsultadataGridView.DataSource = BLL.GruposBLL.GetList(filtro);
+            //ConsultadataGridView.DataSource = BLL.GruposBLL.GetList(filtro);
         }
     }
 }
-        }
-    }
-}
+        
