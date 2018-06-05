@@ -86,7 +86,7 @@ namespace PrimerParcial.UI.Registro
 
                 if (grupoIDNumericUpDown.Value == 0)
                 {
-                    if (BLL.GruposBLL.Guardar(grupos))
+                    if (BLL.GruposBLL.Guardar(LlenaClase()))
                     {
                         MessageBox.Show("Guardado", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grupoIDNumericUpDown.Value = 0;

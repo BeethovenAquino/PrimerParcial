@@ -1,6 +1,6 @@
 CREATE DATABASE PrimerParcialDb
 GO
-USE PrimerParcialDB
+USE PrimerParcialDb
 GO
 --CREATE TABLE Grupos
 --(
