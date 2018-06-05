@@ -342,7 +342,6 @@
             this.cantidadNumericUpDown.Name = "cantidadNumericUpDown";
             this.cantidadNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.cantidadNumericUpDown.TabIndex = 18;
-            this.cantidadNumericUpDown.ValueChanged += new System.EventHandler(this.Guardarbutton_Click);
             // 
             // grupoLabel
             // 
@@ -360,7 +359,7 @@
             this.grupoNumericUpDown.Name = "grupoNumericUpDown";
             this.grupoNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.grupoNumericUpDown.TabIndex = 19;
-            this.grupoNumericUpDown.ValueChanged += new System.EventHandler(this.Guardarbutton_Click);
+       
             // 
             // gruposBindingSource
             // 

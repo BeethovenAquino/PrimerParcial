@@ -94,7 +94,7 @@ namespace PrimerParcial.UI.Registro
                         cantidadNumericUpDown.Value = 0;
                         grupoNumericUpDown.Value = 0;
                         integrantesTextBox.Clear();
-                        integrantesTextBox.Clear();
+                        
 
                     }
 
@@ -162,5 +162,7 @@ namespace PrimerParcial.UI.Registro
                 MessageBox.Show("No se encontro!", "Intente buscar de nuevo",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        
     }
 }
