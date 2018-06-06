@@ -32,7 +32,7 @@ namespace PrimerParcial.UI.Consulta
 
             switch (FiltrocomboBox.SelectedIndex)
             {
-                case 1://GrupoID
+                case 0://GrupoID
                     id = Convert.ToInt32(CriteriotextBox.Text);
 
                     filtro = x => x.GrupoID == id && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
@@ -40,19 +40,19 @@ namespace PrimerParcial.UI.Consulta
 
                     break;
 
-                case 2://Fecha
+                case 1://Fecha
                     filtro = x => x.Fecha.Equals(CriteriotextBox.Text) && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
                     && (x.Fecha.Day <= HastadateTimePicker.Value.Day) && (x.Fecha.Month <= HastadateTimePicker.Value.Month) && (x.Fecha.Year <= HastadateTimePicker.Value.Year);
 
                     break;
 
 
-                case 3://Descripcion
+                case 2://Descripcion
                     filtro = x => x.Descripcion.Equals(CriteriotextBox.Text) && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
                     && (x.Fecha.Day <= HastadateTimePicker.Value.Day) && (x.Fecha.Month <= HastadateTimePicker.Value.Month) && (x.Fecha.Year <= HastadateTimePicker.Value.Year);
 
                     break;
-                case 6://Todo
+                case 3://Todo
                     ConsultadataGridView.DataSource = BLL.GruposBLL.GetList(filtro);
                     break;
             }
@@ -61,17 +61,14 @@ namespace PrimerParcial.UI.Consulta
 
         }
 
-        private void FiltrarcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void FiltrocomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FiltrocomboBox.SelectedIndex == 6)
+            if (FiltrocomboBox.SelectedIndex == 3)
             {
                 CriteriotextBox.Enabled = false;
             }
             else
                 CriteriotextBox.Enabled = true;
-
-
-
         }
     }
  }

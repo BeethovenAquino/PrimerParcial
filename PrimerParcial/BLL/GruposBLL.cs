@@ -81,14 +81,19 @@ namespace PrimerParcial.BLL
         public static Grupos Buscar(int id) {
             Contexto contexto = new Contexto();
             Grupos grupos = new Grupos();
-
-            contexto.Grupo.Find(id);
-            contexto.Dispose();
+            try
+            {
+                grupos = contexto.Grupo.Find(id);
+                contexto.Dispose();
+            }
+            
+          catch(Exception)
+            {
+                throw;
+            }
 
             return grupos;
-
             
-         
         }
 
         public static List<Grupos> GetList(Expression<Func<Grupos, bool>>expression){

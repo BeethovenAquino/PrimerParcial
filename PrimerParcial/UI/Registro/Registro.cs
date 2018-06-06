@@ -56,6 +56,8 @@ namespace PrimerParcial.UI.Registro
             grupos.Fecha = fechaDateTimePicker.Value;
             grupos.Descripcion = descripcionTextBox.Text;
             grupos.Cantidad = Convert.ToInt32(cantidadNumericUpDown.Value);
+            grupos.Grupo = Convert.ToInt32(grupoNumericUpDown.Value);
+            grupos.integrantes = integrantesTextBox.Text;
 
             return grupos;
 
@@ -64,6 +66,7 @@ namespace PrimerParcial.UI.Registro
         private void Nuevobutton_Click(object sender, EventArgs e)
         {
             grupoIDNumericUpDown.Value = 0;
+            fechaDateTimePicker.Value = DateTime.Now;
             descripcionTextBox.Clear();
             cantidadNumericUpDown.Value = 0;
             grupoNumericUpDown.Value = 0;
@@ -156,12 +159,24 @@ namespace PrimerParcial.UI.Registro
                 descripcionTextBox.Text = grupos.Descripcion;
                cantidadNumericUpDown.Value = grupos.Cantidad;
                 grupoNumericUpDown.Value = grupos.Grupo;
-                integrantesTextBox.Text = grupos.integrantes;
+                integrantesTextBox.Text = Convert.ToString(grupos.Cantidad / grupos.Grupo);
 
             }
             else
                 MessageBox.Show("No se encontro!", "Intente buscar de nuevo",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void grupoNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (cantidadNumericUpDown.Value != 0 && grupoNumericUpDown.Value != 0)
+            {
+
+                integrantesTextBox.Text = Convert.ToString(cantidadNumericUpDown.Value / grupoNumericUpDown.Value);
+
+            }
+           
+            
         }
 
         
