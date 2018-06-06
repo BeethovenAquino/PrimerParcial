@@ -20,40 +20,60 @@ namespace PrimerParcial.UI.Consulta
 
         private void Buscarbutton_Click(object sender, EventArgs e)
         {
-            Grupos grupos = new Grupos();
             Expression<Func<Grupos, bool>> filtro = x => true;
-
-            int id, c, g;
-          
-            switch (FiltrocomboBox.SelectedIndex)
+            int id;
+            if (CriteriotextBox.Text == string.Empty && FiltrocomboBox.SelectedIndex != 3)
             {
-                case 0://ID
-                    id = Convert.ToInt32(CriteriotextBox.Text);
-                    filtro = x => x.GrupoID == id
-                    && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
-                    break;
-                case 1://Descripcion
-                    filtro = x => x.Descripcion.Equals(CriteriotextBox.Text)
-                    && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
-                    break;
-                case 2://Cantidad
-                    c = Convert.ToInt32(CriteriotextBox.Text);
-                    filtro = x => x.Cantidad==c
-                    && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
-                    break;
-                case 3://grupos
-                    g = Convert.ToInt32(CriteriotextBox.Text);
-                    filtro = x => x.Grupo==g
-                    && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
-                    break;
-                case 4://integrantes
-                    filtro = x => x.integrantes.Equals(CriteriotextBox.Text)
-                  && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
-                    break;
+                MessageBox.Show("Digite el criterio", "Debe introducir el criterio",
+              MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
+
+            switch (FiltrocomboBox.SelectedIndex)
+            {
+                case 1://GrupoID
+                    id = Convert.ToInt32(CriteriotextBox.Text);
+
+                    filtro = x => x.GrupoID == id && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
+                    && (x.Fecha.Day <= HastadateTimePicker.Value.Day) && (x.Fecha.Month <= HastadateTimePicker.Value.Month) && (x.Fecha.Year <= HastadateTimePicker.Value.Year);
+
+                    break;
+
+                case 2://Fecha
+                    filtro = x => x.Fecha.Equals(CriteriotextBox.Text) && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
+                    && (x.Fecha.Day <= HastadateTimePicker.Value.Day) && (x.Fecha.Month <= HastadateTimePicker.Value.Month) && (x.Fecha.Year <= HastadateTimePicker.Value.Year);
+
+                    break;
+
+
+                case 3://Descripcion
+                    filtro = x => x.Descripcion.Equals(CriteriotextBox.Text) && (x.Fecha.Day >= DesdedateTimePicker.Value.Day) && (x.Fecha.Month >= DesdedateTimePicker.Value.Month) && (x.Fecha.Year >= DesdedateTimePicker.Value.Year)
+                    && (x.Fecha.Day <= HastadateTimePicker.Value.Day) && (x.Fecha.Month <= HastadateTimePicker.Value.Month) && (x.Fecha.Year <= HastadateTimePicker.Value.Year);
+
+                    break;
+                case 6://Todo
+                    ConsultadataGridView.DataSource = BLL.GruposBLL.GetList(filtro);
+                    break;
+            }
             ConsultadataGridView.DataSource = BLL.GruposBLL.GetList(filtro);
+
+
+        }
+
+        private void FiltrarcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (FiltrocomboBox.SelectedIndex == 6)
+            {
+                CriteriotextBox.Enabled = false;
+            }
+            else
+                CriteriotextBox.Enabled = true;
+
+
+
         }
     }
-}
+ }
+
         

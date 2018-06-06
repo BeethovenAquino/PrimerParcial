@@ -81,31 +81,32 @@ namespace PrimerParcial.UI.Registro
             }
             else
             {
-                Grupos grupos = new Grupos();
-               
+                Grupos grupos = LlenaClase();
+                bool paso = false;
+
 
                 if (grupoIDNumericUpDown.Value == 0)
                 {
-                    if (BLL.GruposBLL.Guardar(LlenaClase()))
-                    {
-                        MessageBox.Show("Guardado", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        grupoIDNumericUpDown.Value = 0;
-                        descripcionTextBox.Clear();
-                        cantidadNumericUpDown.Value = 0;
-                        grupoNumericUpDown.Value = 0;
-                        integrantesTextBox.Clear();
-                        
-
-                    }
-
-
-                    else
-                    {
-                        BLL.GruposBLL.modificar(grupos);
-                    }
+                    paso = BLL.GruposBLL.Guardar(grupos);
                 }
-                else {
+                else
+                {
+                    BLL.GruposBLL.modificar(LlenaClase());
+                }
+                if (paso) {
+
                     MessageBox.Show("Guardado", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    grupoIDNumericUpDown.Value = 0;
+                    descripcionTextBox.Clear();
+                    cantidadNumericUpDown.Value = 0;
+                    grupoNumericUpDown.Value = 0;
+                    integrantesTextBox.Clear();
+                    errorProvider1.Clear();
+                }
+
+                else
+                {
+                    MessageBox.Show("No se ha Guardado", "Intente de nuevo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                
             }
@@ -117,7 +118,8 @@ namespace PrimerParcial.UI.Registro
         {
             if (validar(1))
             {
-                MessageBox.Show("Eliminado", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El tipo ID esta vacio", "Llene ese campo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
             else {
 
@@ -126,10 +128,12 @@ namespace PrimerParcial.UI.Registro
                 {
                     MessageBox.Show("Eliminado", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     grupoIDNumericUpDown.Value = 0;
+                    fechaDateTimePicker.Value = DateTime.Now;
                     descripcionTextBox.Clear();
                     cantidadNumericUpDown.Value = 0;
                     grupoNumericUpDown.Value = 0;
                     integrantesTextBox.Clear();
+                    errorProvider1.Clear();
                 }
                 else {
                     MessageBox.Show("No Eliminado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -140,11 +144,7 @@ namespace PrimerParcial.UI.Registro
 
         private void Buscarbutton_Click(object sender, EventArgs e)
         {
-            if (validar(1))
-            {
-                MessageBox.Show("Ingrese un ID");
-                return;
-            }
+           
 
             int id = Convert.ToInt32(grupoIDNumericUpDown.Value);
             Grupos grupos = BLL.GruposBLL.Buscar(id);
@@ -152,6 +152,7 @@ namespace PrimerParcial.UI.Registro
             if (grupos!= null)
             {
                 grupoIDNumericUpDown.Value = grupos.GrupoID;
+                fechaDateTimePicker.Value = grupos.Fecha;
                 descripcionTextBox.Text = grupos.Descripcion;
                cantidadNumericUpDown.Value = grupos.Cantidad;
                 grupoNumericUpDown.Value = grupos.Grupo;
